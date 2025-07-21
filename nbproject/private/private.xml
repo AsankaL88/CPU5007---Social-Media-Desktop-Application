@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/SocialMediaApplication.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/model/User.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/model/Channel.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/model/Message.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/dao/UserDAO.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/dao/MessageDAO.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/dao/ChannelDAO.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/service/UserService.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/service/MessageService.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/service/ChannelService.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/gui/LoginFrame.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/gui/ChannelsFrame.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/gui/ChannelHomeFrame.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/observer/MessagePublisher.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/observer/MessageSubscriber.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/database/DatabaseManager.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/exception/UserAlreadyExistsException.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/exception/InvalidCredentialsException.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/exception/MessageTooLongException.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/exception/DatabaseException.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/src/main/java/com/socialmedia/exception/BCryptPasswordHasher.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/SocialPubSubApp/build.xml</file>
+        </group>
+    </open-files>
+</project-private>

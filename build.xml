@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SocialMediaApp" default="build" basedir=".">
+    <!-- Project properties -->
+    <property name="src.dir" location="src/main/java"/>
+    <property name="test.src.dir" location="src/test/java"/>
+    <property name="build.dir" location="build"/>
+    <property name="classes.dir" location="${build.dir}/classes"/>
+    <property name="test.classes.dir" location="${build.dir}/test-classes"/>
+    <property name="lib.dir" location="lib"/>
+    <property name="resources.dir" location="src/main/resources"/>
+    <property name="test.resources.dir" location="src/test/resources"/>
+    <property name="reports.dir" location="${build.dir}/reports"/>
+    <property name="jar.file" location="${build.dir}/social-media-app.jar"/>
+    
+    <!-- Classpath for compilation -->
+    <path id="compile.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    
+    <!-- Classpath for testing -->
+    <path id="test.classpath">
+        <path refid="compile.classpath"/>
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${test.classes.dir}"/>
+    </path>
+    
+    <!-- Initialize build directory -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${reports.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+    </target>
+    
+    <!-- Download dependencies -->
+    <target name="download-deps" depends="init">
+        <echo message="Downloading dependencies..."/>
+        <!-- SQLite JDBC -->
+        <get src="https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.43.2.2/sqlite-jdbc-3.43.2.2.jar" 
+             dest="${lib.dir}/sqlite-jdbc-3.43.2.2.jar" skipexisting="true"/>
+        
+        <!-- SLF4J API -->
+        <get src="https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar" 
+             dest="${lib.dir}/slf4j-api-2.0.9.jar" skipexisting="true"/>
+        
+        <!-- Logback Classic -->
+        <get src="https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar" 
+             dest="${lib.dir}/logback-classic-1.4.11.jar" skipexisting="true"/>
+        
+        <!-- Logback Core -->
+        <get src="https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar" 
+             dest="${lib.dir}/logback-core-1.4.11.jar" skipexisting="true"/>
+        
+        <!-- JUnit 5 -->
+        <get src="https://repo1.maven.org/maven2/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar" 
+             dest="${lib.dir}/junit-jupiter-5.10.0.jar" skipexisting="true"/>
+        
+        <!-- JUnit Platform -->
+        <get src="https://repo1.maven.org/maven2/org/junit/platform/junit-platform-launcher/1.10.0/junit-platform-launcher-1.10.0.jar" 
+             dest="${lib.dir}/junit-platform-launcher-1.10.0.jar" skipexisting="true"/>
+        
+        <!-- Mockito -->
+        <get src="https://repo1.maven.org/maven2/org/mockito/mockito-core/5.5.0/mockito-core-5.5.0.jar" 
+             dest="${lib.dir}/mockito-core-5.5.0.jar" skipexisting="true"/>
+        
+        <!-- BCrypt -->
+        <get src="https://repo1.maven.org/maven2/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar" 
+             dest="${lib.dir}/jbcrypt-0.4.jar" skipexisting="true"/>
+        
+        <!-- FlatLaf -->
+        <get src="https://repo1.maven.org/maven2/com/formdev/flatlaf/3.2.5/flatlaf-3.2.5.jar" 
+             dest="${lib.dir}/flatlaf-3.2.5.jar" skipexisting="true"/>
+    </target>
+    
+    <!-- Compile main source -->
+    <target name="compile" depends="init,download-deps">
+        <javac srcdir="${src.dir}" 
+               destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               includeantruntime="false"
+               source="15"
+               target="15">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+        
+        <!-- Copy resources -->
+        <copy todir="${classes.dir}" failonerror="false">
+            <fileset dir="${resources.dir}"/>
+        </copy>
+    </target>
+    
+    <!-- Compile test source -->
+    <target name="compile-tests" depends="compile">
+        <javac srcdir="${test.src.dir}" 
+               destdir="${test.classes.dir}"
+               classpathref="test.classpath"
+               includeantruntime="false"
+               source="15"
+               target="15">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+        
+        <!-- Copy test resources -->
+        <copy todir="${test.classes.dir}" failonerror="false">
+            <fileset dir="${test.resources.dir}"/>
+        </copy>
+    </target>
+    
+    <!-- Run tests -->
+    <target name="test" depends="compile-tests">
+        <mkdir dir="${reports.dir}/junit"/>
+        
+        <!-- Run JUnit 5 tests -->
+        <java classname="org.junit.platform.console.ConsoleLauncher" 
+              classpathref="test.classpath" 
+              fork="true"
+              failonerror="true">
+            <arg value="--scan-classpath"/>
+            <arg value="--reports-dir=${reports.dir}/junit"/>
+        </java>
+    </target>
+    
+    <!-- Create JAR file -->
+    <target name="jar" depends="compile">
+        <jar destfile="${jar.file}" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="com.socialmedia.SocialMediaApplication"/>
+                <attribute name="Class-Path" value=". lib/sqlite-jdbc-3.43.2.2.jar lib/slf4j-api-2.0.9.jar lib/logback-classic-1.4.11.jar lib/logback-core-1.4.11.jar lib/jbcrypt-0.4.jar lib/flatlaf-3.2.5.jar"/>
+            </manifest>
+        </jar>
+        
+        <!-- Copy dependencies -->
+        <copy todir="${build.dir}/lib">
+            <fileset dir="${lib.dir}"/>
+        </copy>
+    </target>
+    
+    <!-- Run the application -->
+    <target name="run" depends="jar">
+        <java jar="${jar.file}" fork="true" dir="${build.dir}"/>
+    </target>
+    
+    <!-- Clean build directory -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+    
+    <!-- Generate documentation -->
+    <target name="javadoc" depends="compile">
+        <mkdir dir="${build.dir}/javadoc"/>
+        <javadoc destdir="${build.dir}/javadoc"
+                 sourcepath="${src.dir}"
+                 classpathref="compile.classpath"
+                 packagenames="com.socialmedia.*"
+                 windowtitle="Social Media Application API"
+                 doctitle="Social Media Application API Documentation">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+    
+    <!-- Build everything -->
+    <target name="build" depends="clean,compile,compile-tests,test,jar,javadoc">
+        <echo message="Build completed successfully!"/>
+    </target>
+    
+    <!-- Default target -->
+    <target name="default" depends="build"/>
+</project>
